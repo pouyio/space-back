@@ -13,4 +13,4 @@ app.use(morgan('dev'));
 
 
 app.use('/', articApp);
-app.listen(4000);
+app.listen(3000);
