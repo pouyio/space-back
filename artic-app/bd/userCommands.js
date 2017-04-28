@@ -4,7 +4,7 @@ var user ={};
 
 user.getUser = function(){
     return new Promise(function(resolve, reject) {
-        mysql.query('select * from BuddyApp.user where iduser= ' +id,  function (err, rows, fields) {
+        mysql.query('select * from space_app.user where id =  ' +id,  function (err, rows, fields) {
             if (err){
               return reject(err);
             };
@@ -15,7 +15,7 @@ user.getUser = function(){
 
 user.getUsers = function(id){
     return new Promise(function(resolve, reject) {
-        mysql.query('select * from BuddyApp.user', function (err, rows, fields) {
+        mysql.query('select * from space_app.user', function (err, rows, fields) {
             if (err){
               return reject(err);
             };

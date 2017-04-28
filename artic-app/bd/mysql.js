@@ -1,11 +1,11 @@
 var mysql      = require('mysql');
 var connection = mysql.createConnection({
-  host     : 'localhost',
+  host     : '176.9.145.158',
   user     : 'root',
-  password : '',
-  database : 'ArticApp'
+  password : '179832',
+  database : 'space_app'
 });
 
-// connection.connect();
+connection.connect();
 
 module.exports = connection ;
