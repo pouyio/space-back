@@ -6,6 +6,6 @@ var connection = mysql.createConnection({
   database : 'ArticApp'
 });
 
-connection.connect();
+// connection.connect();
 
 module.exports = connection ;
