@@ -1,10 +1,10 @@
-var mysql = require('./mysql.js');
+var mysql = require('./_mysql.js');
 
 var user ={};
 
-user.getMensajes = function(){
+user.getMessages = function(){
     return new Promise(function(resolve, reject) {
-        mysql.query('select * from BuddyApp.mensajes ',  function (err, rows, fields) {
+        mysql.query('select * from space_app.message ',  function (err, rows, fields) {
             if (err){
               return reject(err);
             };
@@ -12,16 +12,11 @@ user.getMensajes = function(){
         });
     });
 };
-
-
-
-user.getMensajesUser = function(userId){
+user.getMessage = function(id){
     return new Promise(function(resolve, reject) {
-      var q ="select * from BuddyApp.mensajes "+
-             " where from = " + userId +
-             " or to = " + userId;
+      var q ="select * from space_app.message where id = ? ";
 
-        mysql.query(q,  function (err, rows, fields) {
+        mysql.query(q, id, function (err, rows, fields) {
             if (err){
               return reject(err);
             };
@@ -29,6 +24,4 @@ user.getMensajesUser = function(userId){
         });
     });
 };
-
-
 module.exports = user;

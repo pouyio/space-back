@@ -1,10 +1,10 @@
-var mysql = require('./mysql.js');
+var mysql = require('./_mysql.js');
 
 var user ={};
 
-user.getFavoritos = function(){
+user.getChallenges = function(){
     return new Promise(function(resolve, reject) {
-        mysql.query('select * from BuddyApp.favoritos ',  function (err, rows, fields) {
+        mysql.query('select * from space_app.challenge ',  function (err, rows, fields) {
             if (err){
               return reject(err);
             };
@@ -12,12 +12,11 @@ user.getFavoritos = function(){
         });
     });
 };
-
-
-
-user.getFavoritosUser = function(userId){
+user.getChallenge = function(userId){
     return new Promise(function(resolve, reject) {
-        mysql.query('select * from BuddyApp.favoritos where  user = ' +userId,  function (err, rows, fields) {
+      var q ="select * from space_app.challenge where id = ? ";
+
+        mysql.query(q, userId, function (err, rows, fields) {
             if (err){
               return reject(err);
             };
@@ -25,6 +24,4 @@ user.getFavoritosUser = function(userId){
         });
     });
 };
-
-
 module.exports = user;

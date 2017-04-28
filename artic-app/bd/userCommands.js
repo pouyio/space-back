@@ -1,8 +1,8 @@
-var mysql = require('./mysql.js');
+var mysql = require('./_mysql.js');
 
 var user ={};
 
-user.getUser = function(){
+user.getUser = function(id){
     return new Promise(function(resolve, reject) {
         mysql.query('select * from space_app.user where id =  ' +id,  function (err, rows, fields) {
             if (err){
@@ -13,7 +13,7 @@ user.getUser = function(){
     });
 };
 
-user.getUsers = function(id){
+user.getUsers = function(){
     return new Promise(function(resolve, reject) {
         mysql.query('select * from space_app.user', function (err, rows, fields) {
             if (err){

@@ -1,10 +1,10 @@
-var mysql = require('./mysql.js');
+var mysql = require('./_mysql.js');
 
 var user ={};
 
-user.getFotos = function(){
+user.getSeasons = function(){
     return new Promise(function(resolve, reject) {
-        mysql.query('select * from BuddyApp.fotos ',  function (err, rows, fields) {
+        mysql.query('select * from space_app.season ',  function (err, rows, fields) {
             if (err){
               return reject(err);
             };
@@ -12,12 +12,11 @@ user.getFotos = function(){
         });
     });
 };
-
-
-
-user.getFotosUser = function(userId){
+user.getSeason = function(id){
     return new Promise(function(resolve, reject) {
-        mysql.query('select * from BuddyApp.fotos where  user = ' +userId,  function (err, rows, fields) {
+      var q ="select * from space_app.season where id = ? ";
+
+        mysql.query(q, id, function (err, rows, fields) {
             if (err){
               return reject(err);
             };
@@ -25,6 +24,4 @@ user.getFotosUser = function(userId){
         });
     });
 };
-
-
 module.exports = user;

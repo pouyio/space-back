@@ -1,9 +1,9 @@
 var express = require('express');
 var router = express.Router();
-var bd = require('./bd/bd.js');
+var services = require('./../services/_services.js');
 
-router.get('/:userId', function(req, res) {
-    bd.user.getUser(req.params.userId).then(function(result){
+router.get('/:id', function(req, res) {
+    services.valoration.getValoration(req.params.id).then(function(result){
         res.json(result);
     }).catch(function(error){
         res.send(error);
@@ -11,7 +11,7 @@ router.get('/:userId', function(req, res) {
 });
 
 router.get('/', function(req, res) {
-    bd.user.getUsers().then(function(result){
+    services.valoration.getValorations().then(function(result){
         res.json(result);
     }).catch(function(error){
         res.send(error);

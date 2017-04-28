@@ -1,10 +1,10 @@
-var mysql = require('./mysql.js');
+var mysql = require('./_mysql.js');
 
 var user ={};
 
-user.getUserNotifications = function(userId){
+user.getParticipations = function(){
     return new Promise(function(resolve, reject) {
-        mysql.query('select * from BuddyApp.notificaciones where user= ' +userId,  function (err, rows, fields) {
+        mysql.query('select * from space_app.participation ',  function (err, rows, fields) {
             if (err){
               return reject(err);
             };
@@ -12,10 +12,11 @@ user.getUserNotifications = function(userId){
         });
     });
 };
-
-user.getNotifications = function(id){
+user.getParticipation = function(id){
     return new Promise(function(resolve, reject) {
-        mysql.query('select * from BuddyApp.notificaciones', function (err, rows, fields) {
+      var q ="select * from space_app.participation where id = ? ";
+
+        mysql.query(q, id, function (err, rows, fields) {
             if (err){
               return reject(err);
             };
@@ -23,5 +24,4 @@ user.getNotifications = function(id){
         });
     });
 };
-
 module.exports = user;

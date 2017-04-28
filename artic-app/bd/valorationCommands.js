@@ -1,10 +1,10 @@
-var mysql = require('./mysql.js');
+var mysql = require('./_mysql.js');
 
 var user ={};
 
-user.getReservas = function(){
+user.getValorations = function(){
     return new Promise(function(resolve, reject) {
-        mysql.query('select * from BuddyApp.reserva ',  function (err, rows, fields) {
+        mysql.query('select * from space_app.valoration ',  function (err, rows, fields) {
             if (err){
               return reject(err);
             };
@@ -12,16 +12,11 @@ user.getReservas = function(){
         });
     });
 };
-
-
-
-user.getReservasUser = function(userId){
+user.getValoration = function(id){
     return new Promise(function(resolve, reject) {
-      var q ="select * from BuddyApp.reserva "+
-             " where user = " + userId +
-             " or buddy = " + userId;
+      var q ="select * from space_app.valoration where id = ? ";
 
-        mysql.query(q,  function (err, rows, fields) {
+        mysql.query(q, id, function (err, rows, fields) {
             if (err){
               return reject(err);
             };
@@ -29,6 +24,4 @@ user.getReservasUser = function(userId){
         });
     });
 };
-
-
 module.exports = user;

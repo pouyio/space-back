@@ -1,9 +1,9 @@
 var express = require('express');
 var router = express.Router();
-var bd = require('./bd/bd.js');
+var services = require('./../services/_services.js');
 
-router.get('/user/:userId', function(req, res) {
-    bd.favorito.getFavoritosUser(req.params.userId).then(function(result){
+router.get('/:id', function(req, res) {
+    services.participation.getParticipation(req.params.id).then(function(result){
         res.json(result);
     }).catch(function(error){
         res.send(error);
@@ -11,7 +11,7 @@ router.get('/user/:userId', function(req, res) {
 });
 
 router.get('/', function(req, res) {
-    bd.favorito.getFavoritos().then(function(result){
+    services.participation.getParticipations().then(function(result){
         res.json(result);
     }).catch(function(error){
         res.send(error);
