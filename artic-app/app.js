@@ -36,7 +36,7 @@ router.use('/valoracion',valoracion);
 
 
 router.get('/', function(req, res) {
-  res.send("Hola jajaja");
+  res.send("Hola no jajaja");
 });
 
 
