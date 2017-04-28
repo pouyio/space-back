@@ -6,6 +6,8 @@ var jwt           = require('jsonwebtoken');
 var controllers   =require('./controllers/_controllers.js');
 
 router.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
 
