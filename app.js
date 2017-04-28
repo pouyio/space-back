@@ -29,5 +29,5 @@ app.use('/', articApp);
 
 
 
-httpServer.listen(process.env.pot || 80);
+httpServer.listen(process.env.PORT || 80);
 // httpsServer.listen(443);
