@@ -5,11 +5,6 @@ var jwt    = require('jsonwebtoken');;
 var token = '349620940:AAHR2E2T3WoKL7o8R0rXPSdJTBEcozMKsY8';
 var articApp = require('./artic-app/app.js');
 
-
-
-
-
-
 var fs = require('fs');
 var http = require('http');
 var https = require('https');
@@ -19,8 +14,6 @@ var certificate = fs.readFileSync('host.cert', 'utf8');
 var credentials = {key: privateKey, cert: certificate};
 var express = require('express');
 var app = express();
-
-// your express configuration here
 
 var httpServer = http.createServer(app);
 var httpsServer = https.createServer(credentials, app);
