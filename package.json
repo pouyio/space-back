@@ -20,7 +20,8 @@
     "supertest": "^2.0.1"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "start": "node app.js"
   },
   "keywords": [],
   "repository": {
