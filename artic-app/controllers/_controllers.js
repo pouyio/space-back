@@ -6,5 +6,6 @@ controllers.seasons       = require('./seasonsController.js');
 controllers.messages      = require('./messagesController.js');
 controllers.participations = require('./participationsController.js');
 controllers.valorations   = require('./valorationsController.js');
+controllers.quests        = require('./questsController.js');
 
 module.exports =  controllers;

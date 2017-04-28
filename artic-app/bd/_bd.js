@@ -6,5 +6,6 @@ bd.challenge = require('./challengeCommands.js') ;
 bd.season = require('./seasonCommands.js') ;
 bd.message = require('./messageCommands.js');
 bd.participation = require('./participationCommands.js');
+bd.quest = require('./questCommands.js');
 bd.valoration = require('./valorationCommands.js');
 module.exports = bd;

@@ -18,6 +18,7 @@ router.use('/season', controllers.seasons);
 router.use('/message', controllers.messages);
 router.use('/participation', controllers.participations);
 router.use('/valoration', controllers.valorations);
+router.use('/quest', controllers.quests);
 
 router.get('/', function(req, res) {
 res.send("Hola API");

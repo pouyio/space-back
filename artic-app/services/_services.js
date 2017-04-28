@@ -5,5 +5,6 @@ services.participation = require('./participationService.js') ;
 services.season = require('./seasonService.js') ;
 services.user = require('./userService.js') ;
 services.valoration = require('./valorationService.js') ;
+services.quest = require('./questService.js') ;
 
 module.exports = services;
