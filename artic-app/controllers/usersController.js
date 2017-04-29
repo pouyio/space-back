@@ -22,7 +22,7 @@ router.post('/login',function(req, res){
   services.user.login(req.body.user, req.body.password).then(function(result){
       res.json(result);
   }).catch(function(error){
-      res.send(error);
+      res.send(400, error);
   });
 });
 

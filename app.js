@@ -54,7 +54,7 @@ app.use(function(req,res, next){
       var decoded = jwt.verify(req.get('token'), 'secret');
       next();
     } catch(err) {
-      res.writeHead(400, "Auth error");
+      res.writeHead(401, "Auth error");
       res.end();
     }
 

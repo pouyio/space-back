@@ -45,7 +45,7 @@ user.login = (email, password) => {
         };
         console.log(rows);
         if(!rows || rows.length !==1)
-          reject("error");
+          reject("Login not found");
         resolve(rows);
     });
   })
