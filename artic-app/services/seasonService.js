@@ -24,4 +24,17 @@ services.getSeason = function(id){
 };
 
 
+services.getSeasonChallenges = function(id){
+  return new Promise(function(resolve, reject) {
+    bd.season.getSeasonChallenges(id).then(function(result){
+        resolve(result);
+    }).catch(function(error){
+        reject(error);
+    });
+  });
+};
+
+
+
+
 module.exports = services;

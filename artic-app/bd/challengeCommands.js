@@ -5,7 +5,7 @@ var commands ={};
 
 
 
-commands.getChallenges = function(){
+commands.getChallenges = function(current){
     return new Promise(function(resolve, reject) {
         var nestingOptions = [
            { tableName : 'season', pkey: 'id'},

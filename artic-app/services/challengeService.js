@@ -2,9 +2,9 @@ var bd = require('./../bd/_bd.js');
 
 var services ={};
 
-services.getChallenges= function(){
+services.getChallenges= function(current){
     return new Promise(function(resolve, reject) {
-      bd.challenge.getChallenges().then(function(result){
+      bd.challenge.getChallenges(current).then(function(result){
           resolve(result);
       }).catch(function(error){
           reject(error);

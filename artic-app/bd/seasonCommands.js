@@ -1,5 +1,5 @@
 var mysql = require('./../config/mysql.js');
-
+var nested = require('node-mysql-nesting');
 var commands ={};
 
 commands.getSeasons = function(){
@@ -24,4 +24,16 @@ commands.getSeason = function(id){
         });
     });
 };
+
+commands.getSeasonChallenges = function(id){
+    return new Promise(function(resolve, reject) {
+        mysql.query( 'select * from space_app.challenge  where challenge.season =  ?',id,  function (err, rows, fields) {
+            if (err){
+              return reject(err);
+            };
+            resolve(rows);
+        });
+    });
+};
+
 module.exports = commands;
