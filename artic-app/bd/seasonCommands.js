@@ -6,7 +6,7 @@ var commands ={};
 
 var nestingOptions = [
    { tableName : 'season', pkey: 'id'},
-   { tableName : 'challenge', pkey: 'id', fkeys:[{table:'season',col:'season'}]}
+   { tableName : 'challenges', pkey: 'id', fkeys:[{table:'season',col:'season'}]}
 ];
 
 commands.getSeasons = function(){
@@ -34,7 +34,7 @@ commands.getSeason = function(id){
 
 commands.getSeasonChallenges = function(id){
     return new Promise(function(resolve, reject) {
-      mysql.query({sql: 'select * from space_app.season season  left join space_app.challenge challenge on challenge.season = season.id where season.id = ?', nestTables: true}, id, function (err, rows, fields) {
+      mysql.query({sql: 'select * from space_app.season season  left join space_app.challenge challenges on challenges.season = season.id where season.id = ?', nestTables: true}, id, function (err, rows, fields) {
           if (err){
             return reject(err);
           };
