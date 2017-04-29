@@ -28,12 +28,18 @@ services.getUsers = function(){
           reject(error);
       });
     });
-
-
-
 };
 
+services.getUsersLeaderboard =()=>{
+  return new Promise(function(resolve, reject) {
+    bd.user.getUsersLeaderboard().then(function(result){
+      resolve(result);
 
+    }).catch(function(error){
+        reject(error);
+    });
+  });
+}
 services.getUser = function(id){
   return new Promise(function(resolve, reject) {
     bd.user.getUser(id).then(function(result){
@@ -46,7 +52,7 @@ services.getUser = function(id){
 
 
 services.postUser = (user)=>{
-  return new Promise(function(resolve, reject) {  
+  return new Promise(function(resolve, reject) {
     bd.user.createUser(user).then(function(result){
       services.login(user.user, user.password).then(function(result){
           resolve(result);

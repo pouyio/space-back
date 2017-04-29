@@ -1,7 +1,20 @@
 var mysql = require('./../config/mysql.js');
 
 var user ={};
-
+user.getUsersLeaderboard = ()=>{
+  return new Promise(function(resolve, reject) {
+      mysql.query(`select user.id, user.name, sum(valoration.valoration)*sum(valoration.valoration)/2 points from space_app.valoration valoration
+                  join space_app.participation participation on valoration.participation = participation.id
+                  left join space_app.user user on participation.user = user.id
+                  group by user.id ;`,
+        function (err, rows, fields) {
+          if (err){
+            reject(err);
+          };
+          resolve(rows);
+      });
+  });
+}
 user.getUser = function(id){
     return new Promise(function(resolve, reject) {
         mysql.query('select * from space_app.user where id =  ' +id,  function (err, rows, fields) {
