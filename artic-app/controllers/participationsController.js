@@ -18,6 +18,22 @@ router.get('/', function(req, res) {
     });
 });
 
+router.post('/', (req, res)=>{
+    console.log(req.files); // the uploaded file object
+
+          /*
+          //Path where image will be uploaded
+          fstream = fs.createWriteStream(__dirname + '/img/' + filename);
+          file.pipe(fstream);
+          fstream.on('close', function () {
+              console.log("Upload Finished of " + filename);
+              res.redirect('back');           //where to go next
+          });
+          */
+      //});
+  }
+)
+
 
 
 

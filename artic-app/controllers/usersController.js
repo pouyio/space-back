@@ -18,6 +18,15 @@ router.get('/', function(req, res) {
     });
 });
 
+router.post('/login',function(req, res){
+  console.log(req.body.email);
+  services.user.login(req.body.email).then(function(result){
+      res.json(result);
+  }).catch(function(error){
+      res.send(error);
+  });
+});
+
 
 
 

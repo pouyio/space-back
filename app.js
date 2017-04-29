@@ -17,12 +17,24 @@ var app = express();
 
 var httpServer = http.createServer(app);
 var httpsServer = https.createServer(credentials, app);
+const fileUpload = require('express-fileupload');
 
 
 app.set('superSecret', 'hoooooooooolaJajajajja+-*/54'); // secret variable
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-app.use(morgan('dev'));
+
+//app.use(bodyParser.json());
+//app.use(bodyParser.urlencoded({ extended: true }));
+
+
+//app.use(morgan('dev'));
+app.use(fileUpload());
+
+app.post('/upload', function(req, res) {
+  if (!req.files)
+    return res.status(400).send('No files were uploaded.');
+  console.log(req.files);
+});
+
 
 
 app.use('/', articApp);

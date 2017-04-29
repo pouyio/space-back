@@ -1,4 +1,4 @@
-var mysql = require('./_mysql.js');
+var mysql = require('./../config/mysql.js');
 
 var user ={};
 

@@ -12,6 +12,16 @@ router.use(function(req, res, next) {
 });
 
 
+router.use(function(req,res, next){
+  if ( req.path.includes('/user/login')) return next();
+
+  var decoded = jwt.verify(req.get('token'), 'secret');
+  console.log(decoded.data)
+  next();
+});
+
+
+
 router.use('/user', controllers.users);
 router.use('/challenge', controllers.challenges);
 router.use('/season', controllers.seasons);
