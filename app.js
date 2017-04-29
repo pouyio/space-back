@@ -41,11 +41,6 @@ var responseHeaders = {
 };
 
 app.use(function(req,res, next){
-  if ( req.path.includes('/user/login') || req.path.includes('facebookOk')){
-    console.log(req),
-    next();
-
-  }
 
   // Inside a request handler method
   if (req.method === "OPTIONS") {
@@ -53,6 +48,13 @@ app.use(function(req,res, next){
     res.writeHead(200, responseHeaders);
     res.end();
   }
+
+  if ( req.path.includes('/user/login') || req.path.includes('facebookOk')){
+    console.log(req),
+    next();
+
+  }
+
 
   /*
   try {
