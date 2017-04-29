@@ -28,10 +28,11 @@ router.get('/', function(req, res) {
 
 router.post('/', upload.single('file'), function (req, res, next) {
     req.body.user = req.user.id;
+
     sftp.connect(sftp.lunaConnection).then(() => {
-          sftp.put( req.file.buffer, "/ftp/participation_img_"+ req.body.user + '_'+ req.body.challenge+".jpg");
+          sftp.put( req.file.buffer, "/ftp/participation_img_"+ req.body.user + '_'+ req.body.challenge+req.file.originalname.split('.').pop());
       }).then((data) => {
-          services.participation.postParticipation(req.body, "http://luna-1.lbseed.es/participation_img_"+ req.body.user + '_'+ req.body.challenge+".jpg").then(function(result){
+          services.participation.postParticipation(req.body, "http://luna-1.lbseed.es/participation_img_"+ req.body.user + '_'+ req.body.challenge+req.file.originalname.split('.').pop()).then(function(result){
             res.json("Fichero subido correctamente");
           }).catch(function(error){
               res.send(error);
