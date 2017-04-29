@@ -22,8 +22,6 @@ const fileUpload = require('express-fileupload');
 
 app.set('superSecret', 'hoooooooooolaJajajajja+-*/54'); // secret variable
 
-//app.use(bodyParser.json());
-//app.use(bodyParser.urlencoded({ extended: true }));
 
 
 //app.use(morgan('dev'));
@@ -35,6 +33,8 @@ app.post('/upload', function(req, res) {
   console.log(req.files);
 });
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 
 app.use('/', articApp);
