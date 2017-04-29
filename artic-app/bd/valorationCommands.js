@@ -1,6 +1,25 @@
 var mysql = require('./../config/mysql.js');
+var nested = require('node-mysql-nesting');
 
 var commands ={};
+
+var nestingOptions = [ { tableName : 'challenge', pkey: 'id', fkeys:[{table:'season',col:'season'}]},
+   { tableName : 'participation', pkey: 'id', fkeys:[{table:'season',col:'season'}]},
+   { tableName : 'user', pkey: 'id', fkeys:[{table:'season',col:'season'}]}
+];
+
+commands.getRandomValorations = function(userId){
+    return new Promise(function(resolve, reject) {
+        mysql.query('select * from space_app.valoration ',  function (err, rows, fields) {
+            if (err){
+              return reject(err);
+            };
+            resolve(rows);
+        });
+    });
+};
+
+
 
 commands.getValorations = function(){
     return new Promise(function(resolve, reject) {

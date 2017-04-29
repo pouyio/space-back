@@ -52,6 +52,7 @@ app.use(function(req,res, next){
   }else{
     try {
       var decoded = jwt.verify(req.get('token'), 'secret');
+      req.user=decoded.data[0];
       next();
     } catch(err) {
       res.writeHead(401, "Auth error");
