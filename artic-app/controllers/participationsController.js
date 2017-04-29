@@ -5,8 +5,8 @@ var sftp = require('./../config/ftp.js');
 
 
 var multer  = require('multer')
-var upload = multer({ dest: './' })
-
+var storage = multer.memoryStorage()
+var upload = multer({ storage: storage })
 
 
 router.get('/:id', function(req, res) {
@@ -27,13 +27,10 @@ router.get('/', function(req, res) {
 
 
 router.post('/', upload.single('file'), function (req, res, next) {
-
-
+    req.body.user = req.user.id;
     sftp.connect(sftp.lunaConnection).then(() => {
           sftp.put( req.file.buffer, "/ftp/participation_img_"+ req.body.user + '_'+ req.body.challenge+".jpg");
       }).then((data) => {
-          console.log(data, 'file ok');
-
           services.participation.postParticipation(req.body, "http://luna-1.lbseed.es/participation_img_"+ req.body.user + '_'+ req.body.challenge+".jpg").then(function(result){
             res.json("Fichero subido correctamente");
           }).catch(function(error){
