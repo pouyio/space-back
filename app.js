@@ -23,15 +23,9 @@ var upload = multer({ dest: './' })
 app.set('superSecret', 'hoooooooooolaJajajajja+-*/54'); // secret variable
 
 
-
-//app.use(morgan('dev'));
-
 app.post('/upload/', upload.single('file'), function (req, res, next) {
   console.log(req.file);
   res.send("Ok");
-
-  // req.file is the `avatar` file
-  // req.body will hold the text fields, if there were any
 })
 
 
@@ -41,7 +35,4 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/', articApp);
 
-
-
 httpServer.listen(process.env.PORT || 80);
-// httpsServer.listen(443);

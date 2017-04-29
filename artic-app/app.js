@@ -11,9 +11,22 @@ router.use(function(req, res, next) {
   next();
 });
 
+var responseHeaders = {
+    "access-control-allow-origin": "*",
+    "access-control-allow-methods": "GET, POST, PUT, DELETE, OPTIONS",
+    "access-control-allow-headers": "content-type, accept",
+    "access-control-max-age": 10,
+    "Content-Type": "application/json"
+};
 
 router.use(function(req,res, next){
   if ( req.path.includes('/user/login')) return next();
+
+  // Inside a request handler method
+  if (req.method === "OPTIONS") {
+    res.writeHead(statusCode, responseHeaders);
+    res.end();
+  }
 
   var decoded = jwt.verify(req.get('token'), 'secret');
   console.log(decoded.data)
