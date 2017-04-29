@@ -14,16 +14,18 @@ router.use(function(req, res, next) {
 var responseHeaders = {
     "access-control-allow-origin": "*",
     "access-control-allow-methods": "GET, POST, PUT, DELETE, OPTIONS",
-    "access-control-allow-headers": "content-type, accept",
+    "access-control-allow-headers": "content-type, accept, token",
     "access-control-max-age": 10,
     "Content-Type": "application/json"
 };
 
 router.use(function(req,res, next){
-  if ( req.path.includes('/user/login')) return next();
+  if ( req.path.includes('/user/login'))
+    next();
 
   // Inside a request handler method
   if (req.method === "OPTIONS") {
+    //next();
     res.writeHead(200, responseHeaders);
     res.end();
   }
