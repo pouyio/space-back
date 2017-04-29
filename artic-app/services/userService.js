@@ -3,9 +3,9 @@ var jwt           = require('jsonwebtoken');
 
 var services ={};
 
-services.login = function(email){
+services.login = function(email, password){
   return new Promise(function(resolve, reject) {
-      bd.user.login(email).then(function(result){
+      bd.user.login(email, password).then(function(result){
         jwt.sign({
           exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24 * 7),
           data: result
@@ -48,7 +48,7 @@ services.getUser = function(id){
 services.postUser = (user)=>{
   return new Promise(function(resolve, reject) {
     bd.user.createUser(user).then(function(result){
-      services.login(user.email).then(function(result){
+      services.login(user.user, user.password).then(function(result){
           resolve(result);
       }).catch(function(error){
           reject(error);

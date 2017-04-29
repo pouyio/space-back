@@ -34,7 +34,7 @@ app.use(function(req, res, next) {
 var responseHeaders = {
     "access-control-allow-origin": "*",
     "access-control-allow-methods": "GET, POST, PUT, DELETE, OPTIONS",
-    "access-control-allow-headers": "content-type, accept, token",
+    "access-control-allow-headers": "content-type, accept, token, Origin, X-Requested-With, Content-Type, Accept, x-srf-token, X-XSRF-TOKEN",
     "access-control-max-age": 10,
     "Content-Type": "application/json"
 };

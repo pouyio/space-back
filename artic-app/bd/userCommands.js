@@ -16,7 +16,7 @@ user.getUser = function(id){
 user.getUserEmail = function(email){
   console.log(email)
     return new Promise(function(resolve, reject) {
-        mysql.query('select * from space_app.user where email =  "'+email+'"' ,  function (err, rows, fields) {
+        mysql.query('select * from space_app.user where user =  "'+email+'"' ,  function (err, rows, fields) {
             if (err){
               reject(err);
             };
@@ -37,9 +37,9 @@ user.getUsers = function(){
 };
 
 
-user.login = (email) => {
+user.login = (email, password) => {
   return new Promise((resolve, reject)=>{
-    mysql.query('select * from space_app.user where email = ?',email, function (err, rows, fields) {
+    mysql.query('select * from space_app.user where user = ? and password = ?',[email, password], function (err, rows, fields) {
         if (err){
           reject(err);
         };
