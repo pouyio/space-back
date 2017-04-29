@@ -17,10 +17,9 @@ var app = express();
 
 var httpServer = http.createServer(app);
 var httpsServer = https.createServer(credentials, app);
-var multer  = require('multer')
-var upload = multer({ dest: './' })
 
-app.set('superSecret', 'hoooooooooolaJajajajja+-*/54'); // secret variable
+
+app.set('superSecret', 'hoooooooooolaJajajajja+-*/54');
 
 
 
@@ -39,19 +38,18 @@ var responseHeaders = {
     "Content-Type": "application/json"
 };
 
-app.use(function(req,res, next){
 
-  // Inside a request handler method
+
+
+app.use(function(req,res, next){
   if (req.method === "OPTIONS") {
-    //next();
     res.writeHead(200, responseHeaders);
     res.end();
-  }else if ( req.path.includes('/user/login') || req.path.includes('facebookOk') || req.path.includes('createUser') ){
+  }else if ( req.path.includes('/user/login') ){
     next();
   }else if (req.method === "POST" && req.path.includes('user')) {
     next();
   }else{
-
     try {
       var decoded = jwt.verify(req.get('token'), 'secret');
       next();
@@ -62,28 +60,6 @@ app.use(function(req,res, next){
 
   }
 });
-
-
-
-app.post('/upload/', upload.single('file'), function (req, res, next) {
-  console.log(req.file);
-
-  /*
-  var sftp = require('./../config/ftp.js');
-        sftp.connect(sftp.lunaConnection).then(() => {
-            sftp.put('./userService.js', '/ftp/archivo1.txt');
-        }).then((data) => {
-            console.log(data, 'file ok');
-        }).catch((err) => {
-            console.log(err, 'catch error');
-        });
-  */
-  res.send("Ok");
-})
-
-
-
-
 app.use('/', articApp);
 
 httpServer.listen(process.env.PORT || 80);

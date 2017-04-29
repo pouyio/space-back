@@ -1,8 +1,8 @@
 var mysql = require('./../config/mysql.js');
 
-var user ={};
+var commands ={};
 
-user.getMessages = function(){
+commands.getMessages = function(){
     return new Promise(function(resolve, reject) {
         mysql.query('select * from space_app.message ',  function (err, rows, fields) {
             if (err){
@@ -12,7 +12,7 @@ user.getMessages = function(){
         });
     });
 };
-user.getMessage = function(id){
+commands.getMessage = function(id){
     return new Promise(function(resolve, reject) {
       var q ="select * from space_app.message where id = ? ";
 
@@ -24,4 +24,4 @@ user.getMessage = function(id){
         });
     });
 };
-module.exports = user;
+module.exports = commands;

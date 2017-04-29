@@ -23,5 +23,15 @@ services.getValoration = function(id){
   });
 };
 
+services.postValoration = (valoration) =>{
+  return new Promise(function(resolve, reject) {
+    bd.valoration.postValoration(valoration).then(function(result){
+        resolve(result);
+    }).catch(function(error){
+        reject(error);
+    });
+  });
+}
+
 
 module.exports = services;

@@ -1,18 +1,26 @@
 var mysql = require('./../config/mysql.js');
+var nested = require('node-mysql-nesting');
+var commands ={};
 
-var user ={};
 
-user.getChallenges = function(){
+
+
+commands.getChallenges = function(){
     return new Promise(function(resolve, reject) {
-        mysql.query('select * from space_app.challenge ',  function (err, rows, fields) {
+        var nestingOptions = [
+           { tableName : 'season', pkey: 'id'},
+           { tableName : 'challenge', pkey: 'id', fkeys:[{table:'season',col:'season'}]}
+        ];
+        mysql.query({sql: 'select * from space_app.season season  left join space_app.challenge challenge on challenge.season = season.id ', nestTables: true},  function (err, rows, fields) {
             if (err){
               return reject(err);
             };
-            resolve(rows);
+            resolve(nested.convertToNested(rows, nestingOptions));
         });
     });
 };
-user.getChallenge = function(userId){
+
+commands.getChallenge = function(userId){
     return new Promise(function(resolve, reject) {
       var q ="select * from space_app.challenge where id = ? ";
 
@@ -24,4 +32,4 @@ user.getChallenge = function(userId){
         });
     });
 };
-module.exports = user;
+module.exports = commands;

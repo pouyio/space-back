@@ -18,6 +18,14 @@ router.get('/', function(req, res) {
     });
 });
 
+router.post('/', function(req, res) {
+  services.valoration.postValorations(req.params).then(function(result){
+      res.json(result);
+  }).catch(function(error){
+      res.send(error);
+  });
+})
+
 
 
 

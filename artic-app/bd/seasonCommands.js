@@ -1,8 +1,8 @@
 var mysql = require('./../config/mysql.js');
 
-var user ={};
+var commands ={};
 
-user.getSeasons = function(){
+commands.getSeasons = function(){
     return new Promise(function(resolve, reject) {
         mysql.query('select * from space_app.season ',  function (err, rows, fields) {
             if (err){
@@ -12,7 +12,7 @@ user.getSeasons = function(){
         });
     });
 };
-user.getSeason = function(id){
+commands.getSeason = function(id){
     return new Promise(function(resolve, reject) {
       var q ="select * from space_app.season where id = ? ";
 
@@ -24,4 +24,4 @@ user.getSeason = function(id){
         });
     });
 };
-module.exports = user;
+module.exports = commands;

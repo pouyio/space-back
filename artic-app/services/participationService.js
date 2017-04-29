@@ -24,4 +24,17 @@ services.getParticipation = function(id){
 };
 
 
+
+services.postParticipation = function(participation, url){
+  return new Promise(function(resolve, reject) {
+    bd.participation.postParticipation(participation, url).then(function(result){
+      resolve(result);
+    }).catch(function(error){
+        reject(error);
+    });
+  });
+};
+
+
+
 module.exports = services;
