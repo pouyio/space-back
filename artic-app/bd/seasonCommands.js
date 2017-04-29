@@ -1,6 +1,13 @@
 var mysql = require('./../config/mysql.js');
 var nested = require('node-mysql-nesting');
+var nested = require('node-mysql-nesting');
+
 var commands ={};
+
+var nestingOptions = [
+   { tableName : 'season', pkey: 'id'},
+   { tableName : 'challenge', pkey: 'id', fkeys:[{table:'season',col:'season'}]}
+];
 
 commands.getSeasons = function(){
     return new Promise(function(resolve, reject) {
@@ -27,12 +34,12 @@ commands.getSeason = function(id){
 
 commands.getSeasonChallenges = function(id){
     return new Promise(function(resolve, reject) {
-        mysql.query( 'select * from space_app.challenge  where challenge.season =  ?',id,  function (err, rows, fields) {
-            if (err){
-              return reject(err);
-            };
-            resolve(rows);
-        });
+      mysql.query({sql: 'select * from space_app.season season  left join space_app.challenge challenge on challenge.season = season.id where season.id = ?', nestTables: true}, id, function (err, rows, fields) {
+          if (err){
+            return reject(err);
+          };
+          resolve(nested.convertToNested(rows, nestingOptions));
+      });
     });
 };
 
