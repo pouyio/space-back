@@ -46,22 +46,21 @@ app.use(function(req,res, next){
     //next();
     res.writeHead(200, responseHeaders);
     res.end();
-  }
-
-  if ( req.path.includes('/user/login') || req.path.includes('facebookOk') || req.path.includes('createUser') ){
+  }else if ( req.path.includes('/user/login') || req.path.includes('facebookOk') || req.path.includes('createUser') ){
     next();
+  }else if (req.method === "POST" && req.path.includes('user')) {
+    next();
+  }else{
+
+    try {
+      var decoded = jwt.verify(req.get('token'), 'secret');
+      next();
+    } catch(err) {
+      res.writeHead(400, "Auth error");
+      res.end();
+    }
+
   }
-
-
-
-  try {
-    var decoded = jwt.verify(req.get('token'), 'secret');
-  } catch(err) {
-    res.writeHead(200, "Auth error");
-    res.end();
-  }
-//  console.log(decoded.data);
-  next();
 });
 
 
