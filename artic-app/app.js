@@ -24,7 +24,7 @@ router.use(function(req,res, next){
 
   // Inside a request handler method
   if (req.method === "OPTIONS") {
-    res.writeHead(statusCode, responseHeaders);
+    res.writeHead(200, responseHeaders);
     res.end();
   }
 
