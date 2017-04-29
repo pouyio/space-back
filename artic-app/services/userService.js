@@ -22,17 +22,6 @@ services.login = function(email){
 services.getUsers = function(){
     return new Promise(function(resolve, reject) {
       bd.user.getUsers().then(function(result){
-
-  /*
-  var sftp = require('./../config/ftp.js');
-        sftp.connect(sftp.lunaConnection).then(() => {
-            sftp.put('./userService.js', '/ftp/archivo1.txt');
-        }).then((data) => {
-            console.log(data, 'file ok');
-        }).catch((err) => {
-            console.log(err, 'catch error');
-        });
-*/
         resolve(result);
 
       }).catch(function(error){
@@ -56,4 +45,18 @@ services.getUser = function(id){
 };
 
 
+services.postUser = (user)=>{
+  return new Promise(function(resolve, reject) {
+    bd.user.createUser(user).then(function(result){
+      bd.user.getUserEmail(user.email).then(function(result){
+          console.log(user.email)
+          resolve(result);
+      }).catch(function(error){
+          reject(error);
+      });
+    }).catch(function(error){
+        reject(error);
+    });
+  });
+};
 module.exports = services;

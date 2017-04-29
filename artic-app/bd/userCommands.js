@@ -13,6 +13,19 @@ user.getUser = function(id){
     });
 };
 
+user.getUserEmail = function(email){
+  console.log(email)
+    return new Promise(function(resolve, reject) {
+        mysql.query('select * from space_app.user where email =  ' +email,  function (err, rows, fields) {
+            if (err){
+              reject(err);
+            };
+            console.log(rows)
+            resolve(rows);
+        });
+    });
+};
+
 user.getUsers = function(){
     return new Promise(function(resolve, reject) {
         mysql.query('select * from space_app.user', function (err, rows, fields) {
@@ -38,4 +51,15 @@ user.login = (email) => {
     });
   })
 };
+
+user.createUser = (user) => {
+  return new Promise((resolve, reject)=>{
+    mysql.query('INSERT INTO `space_app`.`user` set ?', user , function (err, rows, fields) {
+        if (err){
+          reject(err);
+        };
+        resolve(rows);
+    });
+  })
+}
 module.exports = user;

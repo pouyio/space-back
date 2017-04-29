@@ -6,6 +6,8 @@ var jwt           = require('jsonwebtoken');
 var controllers   =require('./controllers/_controllers.js');
 
 
+router.use(bodyParser.json());
+router.use(bodyParser.urlencoded({ extended: true }));
 
 router.use('/user', controllers.users);
 router.use('/challenge', controllers.challenges);
