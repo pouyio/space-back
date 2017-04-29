@@ -9,10 +9,10 @@ router.get('/challenges', function(req, res) {
           }).catch(function(error){
               res.send(error);
           });
-      
+
 
     }else{
-      services.challenge.getChallenges().then(function(result){
+      services.season.getSeasonsChallenges().then(function(result){
           res.json(result);
       }).catch(function(error){
           res.send(error);
