@@ -54,12 +54,14 @@ app.use(function(req,res, next){
     res.end();
   }
 
+  /*
   try {
     var decoded = jwt.verify(req.get('token'), 'secret');
   } catch(err) {
     res.writeHead(200, "Auth error");
   }
   console.log(decoded.data)
+  */
   next();
 });
 
