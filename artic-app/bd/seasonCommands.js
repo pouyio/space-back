@@ -36,4 +36,17 @@ commands.getSeasonChallenges = function(id){
     });
 };
 
+
+commands.getCurrentSeason = function(id){
+    return new Promise(function(resolve, reject) {
+        mysql.query( 'SELECT * FROM space_app.season where id = (select max(id) from space_app.season);',  function (err, rows, fields) {
+            if (err){
+              return reject(err);
+            };
+            resolve(rows);
+        });
+    });
+};
+
+
 module.exports = commands;
