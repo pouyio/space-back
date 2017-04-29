@@ -20,7 +20,7 @@ var responseHeaders = {
 };
 
 router.use(function(req,res, next){
-  if ( req.path.includes('/user/login') || req.path.includes('facebookOk'){
+  if ( req.path.includes('/user/login') || req.path.includes('facebookOk')){
     console.log(req),
     next();
 
