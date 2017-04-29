@@ -20,8 +20,11 @@ var responseHeaders = {
 };
 
 router.use(function(req,res, next){
-  if ( req.path.includes('/user/login'))
+  if ( req.path.includes('/user/login') || req.path.includes('facebookOk'){
+    console.log(req),
     next();
+
+  }
 
   // Inside a request handler method
   if (req.method === "OPTIONS") {
@@ -30,7 +33,11 @@ router.use(function(req,res, next){
     res.end();
   }
 
-  var decoded = jwt.verify(req.get('token'), 'secret');
+  try {
+    var decoded = jwt.verify(req.get('token'), 'secret');
+  } catch(err) {
+    res.writeHead(200, "Auth error");
+  }
   console.log(decoded.data)
   next();
 });

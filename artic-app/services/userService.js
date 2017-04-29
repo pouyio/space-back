@@ -7,7 +7,7 @@ services.login = function(email){
   return new Promise(function(resolve, reject) {
       bd.user.login(email).then(function(result){
         jwt.sign({
-          exp: Math.floor(Date.now() / 1000) + (60 * 60),
+          exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24 * 7),
           data: result
         }, 'secret', function(err, token) {
             console.log(token);

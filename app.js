@@ -20,7 +20,33 @@ var httpsServer = https.createServer(credentials, app);
 var multer  = require('multer')
 var upload = multer({ dest: './' })
 
+var passport = require('passport'), FacebookStrategy = require('passport-facebook').Strategy;
+
+
+
+
 app.set('superSecret', 'hoooooooooolaJajajajja+-*/54'); // secret variable
+
+
+
+
+passport.use(new FacebookStrategy({
+    clientID: '785355161629723',
+    clientSecret: 'c5640ae43506e9c85cf1f80a348ad72e',
+    callbackURL: "https://spaceapp2017.herokuapp.com/facebookOk"
+  },
+  function(accessToken, refreshToken, profile, done) {
+    console.log(profile);
+    done(profile);
+  }
+));
+
+
+
+
+app.get('/auth/facebook', passport.authenticate('facebook'));
+app.get('/auth/facebook/callback',  passport.authenticate('facebook', { successRedirect: '/', failureRedirect: '/login' }));
+
 
 
 app.post('/upload/', upload.single('file'), function (req, res, next) {
