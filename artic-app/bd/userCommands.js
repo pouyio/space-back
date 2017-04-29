@@ -16,11 +16,10 @@ user.getUser = function(id){
 user.getUserEmail = function(email){
   console.log(email)
     return new Promise(function(resolve, reject) {
-        mysql.query('select * from space_app.user where email =  ' +email,  function (err, rows, fields) {
+        mysql.query('select * from space_app.user where email =  "'+email+'"' ,  function (err, rows, fields) {
             if (err){
               reject(err);
             };
-            console.log(rows)
             resolve(rows);
         });
     });

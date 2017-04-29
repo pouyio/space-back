@@ -27,7 +27,7 @@ router.post('/login',function(req, res){
 });
 
 
-router.post('/createUser', function(req, res){
+router.post('/', function(req, res){
   services.user.postUser(req.body).then(function(result){
       res.json(result);
   }).catch(function(error){

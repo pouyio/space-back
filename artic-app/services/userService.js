@@ -48,8 +48,7 @@ services.getUser = function(id){
 services.postUser = (user)=>{
   return new Promise(function(resolve, reject) {
     bd.user.createUser(user).then(function(result){
-      bd.user.getUserEmail(user.email).then(function(result){
-          console.log(user.email)
+      services.login(user.email).then(function(result){
           resolve(result);
       }).catch(function(error){
           reject(error);
