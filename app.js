@@ -27,14 +27,14 @@ app.set('superSecret', 'hoooooooooolaJajajajja+-*/54'); // secret variable
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-srf-token");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-xsrf-token");
   next();
 });
 
 var responseHeaders = {
     "access-control-allow-origin": "*",
     "access-control-allow-methods": "GET, POST, PUT, DELETE, OPTIONS",
-    "access-control-allow-headers": "content-type, accept, token, Origin, X-Requested-With, x-srf-token",
+    "access-control-allow-headers": "content-type, accept, token, Origin, X-Requested-With, x-xsrf-token",
     "access-control-max-age": 10,
     "Content-Type": "application/json"
 };
