@@ -17,7 +17,7 @@ commands.getRandomValorations = function(userId){
             if (err){
               return reject(err);
             };
-            resolve(rows[0]);
+            resolve(rows[0] || false);
         });
     });
 };
