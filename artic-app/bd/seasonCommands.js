@@ -6,8 +6,9 @@ var commands ={};
 
 var nestingOptions = [
    { tableName : 'season', pkey: 'id'},
-   { tableName : 'challenges', pkey: 'id', fkeys:[{table:'season',col:'season'}]}
-];
+   { tableName : 'challenges', pkey: 'id', fkeys:[{table:'season',col:'season'}]},
+   { tableName : 'participations', pkey: 'id', fkeys:[{table:'challenges',col:'challenge'}]}
+ ];
 
 commands.getSeasons = function(){
     return new Promise(function(resolve, reject) {
@@ -32,9 +33,12 @@ commands.getSeason = function(id){
     });
 };
 
-commands.getSeasonChallenges = function(id){
+commands.getSeasonChallenges = function(id, user){
     return new Promise(function(resolve, reject) {
-      mysql.query({sql: 'select * from space_app.season season  left join space_app.challenge challenges on challenges.season = season.id where season.id = ?', nestTables: true}, id, function (err, rows, fields) {
+      mysql.query({sql: `select * from space_app.season season
+                        left join space_app.challenge challenges on challenges.season = season.id
+                        left join space_app.participation participations on challenges.id = participations.challenge and participations.user = ?
+                        where season.id = ? `, nestTables: true}, [user, id], function (err, rows, fields) {
           if (err){
             return reject(err);
           };
@@ -56,13 +60,16 @@ commands.getCurrentSeason = function(id){
 };
 
 
-commands.getSeasonsChallenges = function(current){
+commands.getSeasonsChallenges = function(user){
     return new Promise(function(resolve, reject) {
         var nestingOptions = [
            { tableName : 'season', pkey: 'id'},
            { tableName : 'challenges', pkey: 'id', fkeys:[{table:'season',col:'season'}]}
         ];
-        mysql.query({sql: 'select * from space_app.season season  left join space_app.challenge challenges on challenges.season = season.id ', nestTables: true},  function (err, rows, fields) {
+            mysql.query({sql: `select * from space_app.season season
+                          left join space_app.challenge challenges on challenges.season = season.id
+                          left join space_app.participation participations on challenges.id = participations.challenge and participations.user = ?
+                        ` ,nestTables: true}, user,  function (err, rows, fields) {
             if (err){
               return reject(err);
             };

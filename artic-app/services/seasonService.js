@@ -2,11 +2,11 @@ var bd = require('./../bd/_bd.js');
 
 var services ={};
 
-services.getCurrentSeason = (getChallenges)=>{
+services.getCurrentSeason = (getChallenges, user)=>{
   return new Promise(function(resolve, reject) {
     bd.season.getCurrentSeason().then(function(result){
       if(getChallenges){
-        bd.season.getSeasonChallenges(result[0].id).then(function(result){
+        bd.season.getSeasonChallenges(result[0].id,user).then(function(result){
             resolve(result);
         }).catch(function(error){
             reject(error);
@@ -43,9 +43,9 @@ services.getSeason = function(id){
 };
 
 
-services.getSeasonChallenges = function(id){
+services.getSeasonChallenges = function(id, user){
   return new Promise(function(resolve, reject) {
-    bd.season.getSeasonChallenges(id).then(function(result){
+    bd.season.getSeasonChallenges(id, user).then(function(result){
         resolve(result);
     }).catch(function(error){
         reject(error);
@@ -54,9 +54,9 @@ services.getSeasonChallenges = function(id){
 };
 
 
-services.getSeasonsChallenges = function(){
+services.getSeasonsChallenges = function(user){
   return new Promise(function(resolve, reject) {
-    bd.season.getSeasonsChallenges().then(function(result){
+    bd.season.getSeasonsChallenges(user).then(function(result){
         resolve(result);
     }).catch(function(error){
         reject(error);
