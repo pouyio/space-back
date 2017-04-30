@@ -2,14 +2,19 @@ var bd = require('./../bd/_bd.js');
 
 var services ={};
 
-services.getCurrentSeason = ()=>{
+services.getCurrentSeason = (getChallenges)=>{
   return new Promise(function(resolve, reject) {
     bd.season.getCurrentSeason().then(function(result){
-      bd.season.getSeasonChallenges(result[0].id).then(function(result){
-          resolve(result);
-      }).catch(function(error){
-          reject(error);
-      });
+      if(getChallenges){
+        bd.season.getSeasonChallenges(result[0].id).then(function(result){
+            resolve(result);
+        }).catch(function(error){
+            reject(error);
+        });
+      }else{
+        resolve(result[0]);
+      }
+
     }).catch(function(error){
         reject(error);
     });

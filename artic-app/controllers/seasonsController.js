@@ -4,11 +4,11 @@ var services = require('./../services/_services.js');
 
 router.get('/challenges', function(req, res) {
     if(req.query.current){
-      services.season.getCurrentSeason().then(function(result){
-              res.json(result);
-          }).catch(function(error){
-              res.send(error);
-          });
+      services.season.getCurrentSeason(true).then(function(result){
+          res.json(result);
+      }).catch(function(error){
+          res.send(error);
+      });
 
 
     }else{
@@ -50,11 +50,25 @@ router.get('/:id/challenges', function(req, res) {
 
 
 router.get('/', function(req, res) {
-    services.season.getSeasons().then(function(result){
-        res.json(result);
-    }).catch(function(error){
-        res.send(error);
-    });
+
+
+    if(req.query.current){
+      services.season.getCurrentSeason(false).then(function(result){
+          res.json(result);
+      }).catch(function(error){
+          res.send(error);
+      });
+
+
+    }else{
+      services.season.getSeasons().then(function(result){
+          res.json(result);
+      }).catch(function(error){
+          res.send(error);
+      });
+    }
+
+
 });
 
 
