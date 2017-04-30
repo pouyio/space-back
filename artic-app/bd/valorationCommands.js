@@ -7,17 +7,17 @@ var query = `SELECT challenge.name, challenge.description, participation.id part
 left join space_app.participation participation on participation.challenge = challenge.id
 left join space_app.user user on participation.user = user.id
 left join space_app.valoration valoration on valoration.participation = participation.id
-where participation.id is not null and  (select count(1) from space_app.valoration where valoration.user =1) <1
+where participation.id is not null and  (select count(1) from space_app.valoration where valoration.user =?) <1
 group by challenge.id, participation.id
 order by count(valoration.id);`
 
 commands.getRandomValorations = function(userId){
     return new Promise(function(resolve, reject) {
-        mysql.query(query,  function (err, rows, fields) {
+        mysql.query(query,userId,  function (err, rows, fields) {
             if (err){
               return reject(err);
             };
-            resolve(rows);
+            resolve(rows[0]);
         });
     });
 };
