@@ -61,11 +61,8 @@ commands.getCurrentSeason = function(id){
 
 
 commands.getSeasonsChallenges = function(user){
+  console.log(user)
     return new Promise(function(resolve, reject) {
-        var nestingOptions = [
-           { tableName : 'season', pkey: 'id'},
-           { tableName : 'challenges', pkey: 'id', fkeys:[{table:'season',col:'season'}]}
-        ];
             mysql.query({sql: `select * from space_app.season season
                           left join space_app.challenge challenges on challenges.season = season.id
                           left join space_app.participation participations on challenges.id = participations.challenge and participations.user = ?
@@ -73,6 +70,7 @@ commands.getSeasonsChallenges = function(user){
             if (err){
               return reject(err);
             };
+
             resolve(nested.convertToNested(rows, nestingOptions));
         });
     });
