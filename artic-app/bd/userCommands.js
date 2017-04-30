@@ -6,7 +6,7 @@ user.getUsersLeaderboard = ()=>{
       mysql.query(`select user.id, user.name, sum(valoration.valoration)*sum(valoration.valoration)/2 points from space_app.valoration valoration
                   join space_app.participation participation on valoration.participation = participation.id
                   left join space_app.user user on participation.user = user.id
-                  group by user.id ;`,
+                  group by user.id  order by points desc ;`,
         function (err, rows, fields) {
           if (err){
             reject(err);

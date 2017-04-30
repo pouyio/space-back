@@ -9,7 +9,7 @@ commands.getUsersLeaderboard = (id)=>{
                     join space_app.participation participation on valoration.participation = participation.id
                     left join space_app.user user on participation.user = user.id
                     where participation.challenge = ?
-                    group by user.id, participation.challenge `, id,
+                    group by user.id, participation.challenge  order by points desc `, id,
         function (err, rows, fields) {
           if (err){
             reject(err);
