@@ -3,6 +3,23 @@ var commands ={};
 
 
 
+commands.getUsersLeaderboard = (id)=>{
+  return new Promise(function(resolve, reject) {
+      mysql.query(`select user.id, user.name, sum(valoration.valoration)*sum(valoration.valoration)/2 points from space_app.valoration valoration
+                    join space_app.participation participation on valoration.participation = participation.id
+                    left join space_app.user user on participation.user = user.id
+                    where participation.challenge = ?
+                    group by user.id, participation.challenge `, id,
+        function (err, rows, fields) {
+          if (err){
+            reject(err);
+          };
+          resolve(rows);
+      });
+  });
+}
+
+
 
 commands.getChallenges = function(current){
     return new Promise(function(resolve, reject) {

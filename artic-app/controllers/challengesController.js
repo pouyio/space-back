@@ -10,6 +10,14 @@ router.get('/:id', function(req, res) {
     });
 });
 
+router.get('/:id/leaderboard', function(req, res) {
+    services.challenge.getUsersLeaderboard(req.params.id).then(function(result){
+        res.json(result);
+    }).catch(function(error){
+        res.send(error);
+    });
+});
+
 router.get('/', function(req, res) {
     services.challenge.getChallenges().then(function(result){
         res.json(result);

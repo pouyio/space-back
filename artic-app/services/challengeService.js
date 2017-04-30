@@ -23,5 +23,15 @@ services.getChallenge = function(id){
   });
 };
 
+services.getUsersLeaderboard =(id)=>{
+  return new Promise(function(resolve, reject) {
+    bd.challenge.getUsersLeaderboard(id).then(function(result){
+      resolve(result);
+
+    }).catch(function(error){
+        reject(error);
+    });
+  });
+}
 
 module.exports = services;
