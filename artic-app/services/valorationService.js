@@ -32,9 +32,9 @@ services.getValoration = function(id){
   });
 };
 
-services.postValoration = (valoration) =>{
+services.postValoration = (valoration, user) =>{
   return new Promise(function(resolve, reject) {
-    bd.valoration.postValoration(valoration).then(function(result){
+    bd.valoration.postValoration(valoration, user).then(function(result){
         resolve(result);
     }).catch(function(error){
         reject(error);

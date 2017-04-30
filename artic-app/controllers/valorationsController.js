@@ -31,15 +31,11 @@ router.get('/', function(req, res) {
 });
 
 router.post('/', function(req, res) {
-  services.valoration.postValorations(req.params).then(function(result){
+  services.valoration.postValoration(req.params, req.user.id).then(function(result){
       res.json(result);
   }).catch(function(error){
       res.send(error);
   });
 })
-
-
-
-
 
 module.exports = router;

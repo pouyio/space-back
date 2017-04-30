@@ -47,7 +47,8 @@ commands.getValoration = function(id){
     });
 };
 
-commands.postValoration = (valoration) => {
+commands.postValoration = (valoration, user) => {
+  valoration.user = user;
   return new Promise((resolve, reject)=>{
     mysql.query('INSERT INTO `space_app`.`valoration` set ?', valoration , function (err, rows, fields) {
         if (err){
