@@ -31,7 +31,7 @@ router.get('/', function(req, res) {
 });
 
 router.post('/', function(req, res) {
-  services.valoration.postValoration(req.params, req.user.id).then(function(result){
+  services.valoration.postValoration(req.body, req.user.id).then(function(result){
       res.json(result);
   }).catch(function(error){
       res.send(error);

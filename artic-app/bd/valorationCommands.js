@@ -54,7 +54,7 @@ commands.postValoration = (valoration, user) => {
         if (err){
           reject(err);
         };
-        resolve(rows);
+        resolve("ok");
     });
   })
 };
