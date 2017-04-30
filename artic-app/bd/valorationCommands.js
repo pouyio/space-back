@@ -7,7 +7,7 @@ var query = `SELECT challenge.name, challenge.description, participation.id part
 left join space_app.participation participation on participation.challenge = challenge.id
 left join space_app.user user on participation.user = user.id
 left join space_app.valoration valoration on valoration.participation = participation.id
-where participation.id is not null and  (select count(1) from space_app.valoration v where v.user = ? and v.participation != participation.id ) <1 and participation.user != ?
+where participation.id is not null and  (select count(1) from space_app.valoration v where v.user = ? and v.participation = participation.id ) <1 and participation.user != ?
 group by challenge.id, participation.id
 order by count(valoration.id);`
 
